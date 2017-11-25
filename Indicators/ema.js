@@ -5,6 +5,7 @@ class EMA extends SMA {
   constructor( period ) {
     super(period);
     this.type = 'EMA';
+    this.upateType = 'Price';
     this.SMA = new SMA(period);
     this.multiplier = 2 / (period + 1);
   }

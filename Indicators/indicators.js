@@ -1,7 +1,8 @@
 //Top Level Indicator Object Prototype
 class Indicator {
   constructor() {
-    this.type = 'none';
+    this.type = 'none'; // 'EMA', 'SMA', 'ParabolicSAR'
+    this.upateType = 'undefined'; // 'Price', 'Candelstick'
     this.isValid = false;
     this.data = []; //store past [period] no of prices
     this.history = []; //store past MA values

@@ -5,6 +5,8 @@ class SMA extends MA {
   constructor( period ) {
     super(period);
     this.type = 'SMA'
+    this.upateType = 'Price';
+
   }
 
   //SMA update function

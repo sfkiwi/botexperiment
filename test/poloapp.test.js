@@ -2,6 +2,7 @@ var chai = require('chai');
 var expect = chai.expect;
 var EMA = require('../Indicators/ema');
 var SMA = require('../Indicators/sma');
+var PSAR = require('../Indicators/psar');
 
 
 var testData = [22.2734000
@@ -34,6 +35,59 @@ var testData = [22.2734000
 ,23.0976000
 ,22.4025000
 ,22.1725000];
+
+var testData2 = [
+
+{ open: 10.3,	high: 10.33,	low: 10.11,  close: 10.16 },
+{ open: 9.95,	high: 9.98,	low: 9.76,	  close: 9.80 },
+{ open: 9.75,	high: 9.83,	low: 9.64,   close: 9.76 },
+{ open: 9.55,	high: 9.6,	low: 9.35,   close: 9.41 },
+{ open: 9.55,	high: 9.85,	low: 9.51,   close: 9.85 },
+{ open: 9.77,	high: 9.8,	low: 9.25,   close: 9.33 },
+{ open: 9.09,	high: 9.19,	low: 9.0,   close: 9.06 },
+{ open: 9.16,	high: 9.41,	low: 9.16,   close: 9.40 },
+{ open: 9.40,	high: 9.47,	low: 9.08,   close: 9.22 },
+{ open: 8.95,	high: 9.32,	low: 8.95,   close: 9.31 },
+{ open: 9.64, high: 9.94,	low: 9.55,   close: 9.76 },
+{ open: 9.83,	high: 10.23,	low: 9.83,   close: 10.00 },
+{ open: 10.0,	high: 10.11,	low: 9.57,   close: 9.59 },
+{ open: 9.46,	high: 10.5,	low: 9.46,   close: 10.40 },
+{ open: 10.88,high: 11.25,	low: 10.8,	close: 11.23 },
+{ open: 11.3,	high: 11.57,	low: 11.3,	close: 11.44 },
+{ open: 11.49,	high: 11.55,	low: 11.2,	close: 11.44 },
+{ open: 11.42,	high: 11.8,	low: 11.3,	close: 11.78 },
+{ open: 11.78,	high: 11.9,	low: 11.7,	close: 11.88 },
+{ open: 11.85,	high: 11.94,	low: 11.6,	close: 11.67 },
+{ open: 11.5,	high: 11.59,	low: 11.3,	close: 11.33 },
+{ open: 11.22,	high: 11.43,	low: 11.05,	close: 11.05 },
+{ open: 10.95,	high: 11.23,	low: 10.87,	close: 11.09 },
+{ open: 11.22,	high: 11.37,	low: 11.11,	close: 11.35 },
+{ open: 11.20,	high: 11.34,	low: 11.12,	close: 11.27 },
+{ open: 11.08,	high: 11.27,	low: 11.0,	close: 11.00 },
+{ open: 10.86,	high: 10.94,	low: 10.8,  close: 10.76 },
+{ open: 10.68,	high: 10.76,	low: 10.5,	close: 10.54 },
+{ open: 10.62,	high: 10.69,	low: 10.6,	close: 10.68 },
+{ open: 10.66,	high: 10.78,	low: 10.1,	close: 10.09 },
+{ open: 9.95,	high: 10.02,	low: 9.8,   close: 9.89 },
+{ open: 9.95,	high: 10.06,	low: 9.8,   close: 10.04 },
+{ open: 9.75,	high: 9.8,	low: 9.5,   close: 9.63 },
+{ open: 9.68,	high: 9.75,	low: 9.6,   close: 9.66 },
+{ open: 9.42,	high: 9.5,  low: 9.3,   close: 9.36 },
+{ open: 9.28,	high: 9.39,	low: 9.1,   close: 9.37 },
+{ open: 9.4,	high: 9.54,	low: 9.1,   close: 9.10 },
+{ open: 8.97,	high: 9.45,	low: 9.0,   close: 9.43 },
+{ open: 9.37,	high: 9.65,	low: 9.3,	  close: 9.52 },
+{ open: 9.8,	high: 10.0,	low: 9.8,   close: 9.81 },
+{ open: 10.0,	high: 10.0,	low: 9.9,   close: 9.91 },
+{ open: 9.6,	high: 9.8,	low: 9.6,   close: 9.76 },
+{ open: 9.7,	high: 10.1,	low: 9.7,   close: 9.96 },
+{ open: 10.0,	high: 10.0,	low: 9.3,   close: 9.26 },
+{ open: 9.1,	high: 9.4,	low: 9.1,   close: 9.40 },
+{ open: 9.3,	high: 9.5,	low: 9.2,   close: 9.22 },
+{ open: 9.2,	high: 9.3,	low: 9.1,   close: 9.20 },
+{ open: 9.1,	high: 9.4,	low: 8.8,   close: 9.37 },
+{ open: 9.3,	high: 9.4,	low: 9.3,   close: 9.35 },
+{ open: 9.3,	high: 10.1,	low: 9.3,   close: 10.08 }];
 
 describe('EMA', function() {
   var testEMA;
@@ -165,5 +219,116 @@ describe('SMA', function() {
   it('should return the SMA on the nth+1 call', function() {
     testSMA.update(testData[12]);
     expect(testSMA.last).to.equal(22.26238);
+  });
+});
+
+describe('Parabolic SAR', function() {
+  var testPSAR;
+  before( function() {
+    testPSAR = new PSAR(0.02, 0.2);
+  });
+  it('should start out with isValid flag as false', function() {
+    expect(testPSAR.isValid).to.equal(false);
+  });
+  it('should not calculate a SAR if called less than 5 times', function() {
+    testPSAR.update(testData2[0]);
+    expect(testPSAR.last).to.equal(0);
+    expect(testPSAR.isValid).to.equal(false);
+    testPSAR.update(testData2[1]);
+    expect(testPSAR.last).to.equal(0);
+    expect(testPSAR.isValid).to.equal(false);
+    testPSAR.update(testData2[2]);
+    expect(testPSAR.last).to.equal(0);
+    expect(testPSAR.isValid).to.equal(false);
+    testPSAR.update(testData2[3]);
+    expect(testPSAR.last).to.equal(0);
+    expect(testPSAR.isValid).to.equal(false);
+  });
+  it('should return the SAR on the 5th call where n is the period', function() {
+    testPSAR.update(testData2[4]);
+    expect(testPSAR.last).to.equal(9.350);
+  });
+  it('should set isValid flag to true', function() {
+    expect(testPSAR.isValid).to.equal(true);
+  });
+  it('should return the SAR on the nth+1 call', function() {
+    testPSAR.update(testData2[5]);
+    expect(testPSAR.last).to.equal(9.350);
+  });
+  it('should return the EMA on the nth+1 call', function() {
+    testPSAR.update(testData2[6]);
+    expect(testPSAR.last).to.equal(10.330);
+  });
+  it('should return the EMA on the nth+1 call', function() {
+    testPSAR.update(testData2[7]);
+    expect(testPSAR.last).to.equal(10.2768);
+  });
+  it('should return the EMA on the nth+1 call', function() {
+    testPSAR.update(testData2[8]);
+    expect(testPSAR.last).to.equal(10.225728);
+  });
+  it('should return the EMA on the nth+1 call', function() {
+    testPSAR.update(testData2[9]);
+    expect(testPSAR.last).to.equal(10.17669888);
+  });
+  it('should return the EMA on the nth+1 call', function() {
+    testPSAR.update(testData2[10]);
+    expect(testPSAR.last).to.equal(10.1030969472);
+  });
+  it('should return the EMA on the nth+1 call', function() {
+    testPSAR.update(testData2[11]);
+    expect(testPSAR.last).to.equal(10.033911130367999);
+  });
+  it('should return the EMA on the nth+1 call', function() {
+    testPSAR.update(testData2[12]);
+    expect(testPSAR.last).to.equal(8.950);
+  });
+  it('should return the EMA on the nth+1 call', function() {
+    testPSAR.update(testData2[13]);
+    expect(testPSAR.last).to.equal(8.9964);
+  });
+  it('should return the EMA on the nth+1 call', function() {
+    testPSAR.update(testData2[14]);
+    expect(testPSAR.last).to.equal(9.086616);
+  });
+  it('should return the EMA on the nth+1 call', function() {
+    testPSAR.update(testData2[15]);
+    expect(testPSAR.last).to.equal(9.25968672);
+  });
+  it('should return the EMA on the nth+1 call', function() {
+    testPSAR.update(testData2[16]);
+    expect(testPSAR.last).to.equal(9.490718048);
+  });
+  it('should return the EMA on the nth+1 call', function() {
+    testPSAR.update(testData2[17]);
+    expect(testPSAR.last).to.equal(9.698646243199999);
+  });
+  it('should return the EMA on the nth+1 call', function() {
+    testPSAR.update(testData2[18]);
+    expect(testPSAR.last).to.equal(9.950808694015999);
+  });
+  it('should return the EMA on the nth+1 call', function() {
+    testPSAR.update(testData2[19]);
+    expect(testPSAR.last).to.equal(10.22369547685376);
+  });
+  it('should return the EMA on the nth+1 call', function() {
+    testPSAR.update(testData2[20]);
+    expect(testPSAR.last).to.equal(10.498304200557158);
+  });
+  it('should return the EMA on the nth+1 call', function() {
+    testPSAR.update(testData2[21]);
+    expect(testPSAR.last).to.equal(10.728975528468013);
+  });
+  it('should return the EMA on the nth+1 call', function() {
+    testPSAR.update(testData2[22]);
+    expect(testPSAR.last).to.equal(10.92273944391313);
+  });
+  it('should return the EMA on the nth+1 call', function() {
+    testPSAR.update(testData2[23]);
+    expect(testPSAR.last).to.equal(11.94);
+  });
+  it('should return the EMA on the nth+1 call', function() {
+    testPSAR.update(testData2[24]);
+    expect(testPSAR.last).to.equal(11.906799999999999);
   });
 });
