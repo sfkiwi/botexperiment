@@ -1,44 +1,69 @@
+var autobahn = require('autobahn');
+var _ = require('underscore');
+
+var wsuri = "wss://api.poloniex.com";
 
 
 class PoloniexConnector {
-  constructor() {
-    super();
-
+  constructor(pair) {
+    
     this.connection = new autobahn.Connection({
-      var wsuri = "wss://api.poloniex.com";
-        url: wsuri,
-        realm: "realm1"
-      });
+      url: wsuri,
+      realm: "realm1"
+    });
 
-      this.connection.onclose = this.onclose;
-      this.connection.onopen = this.onopen;
+    this.pair = pair;
+    this.connection.onClose = this.onClose.bind(this);
+
   }
 
   open() {
-    super.open();
-  }
-  close() {
-    super.close();
-  }
-  onopen() {
-    super.onopen();
-  }
-  onclose(reason, details) {
-    super.onclose();
 
-    if (reason === "unreachable") {
-      console.log(`Unable to establish connection (retry no: ${details.retry_count})`);
-    } else if (reason === "lost") {
-      console.log("Connection Lost");
-    } else if (reason === "closed") {
-      console.log("Websocket connection closed");
-      if (details.message) {
-        console.log(`Message: ${details.message}`);
+    return new Promise((resolve, reject) => {
+
+
+      this.connection.onopen = function (session, details) {
+
+        session.subscribe('ticker', this.onTickPrep.bind(this))
+
+          .then(resolve)
+
+          .catch(reject);
+      };
+
+      this.connection.open();
+    });
+  }
+
+  onTickPrep(args, kwargs, details) {
+
+    if (args) {
+      if (args[0] === this.pair) {
+        this.onTick({
+          timestamp: Date.now(),
+          ticker: args[0],
+          lastPrice: parseFloat(args[1]),
+          lowestAsk: parseFloat(args[2]),
+          highestBid: parseFloat(args[3]),
+          change: parseFloat(args[4]),
+          baseVolume: parseFloat(args[5]),
+          quoteVol: parseFloat(args[6]),
+          isFrozen: args[7],
+          high24hr: parseFloat(args[8]),
+          low24hr: parseFloat(args[9])
+        });
       }
-    } else if (reason === "unsupported") {
-      console.log("Websocket connection not supported");
-    } else {
-      console.log("Connection Closed: Unknown Reason");
     }
   }
+
+  onTick() {
+    //should get overridden by client
+  }
+
+  onClose(reason, details) {
+    console.log('Connection Closed, reason: ', reason);
+  }
 }
+
+module.exports = PoloniexConnector;
+

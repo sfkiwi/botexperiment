@@ -1,7 +1,8 @@
 {
   "dependencies": {
     "autobahn": "^17.5.2",
-    "underscore": "^1.8.3"
+    "underscore": "^1.8.3",
+    "ws": "^3.3.3"
   },
   "devDependencies": {
     "chai": "^4.1.2",

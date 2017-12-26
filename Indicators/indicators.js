@@ -31,6 +31,8 @@ class Indicator {
   update() { return };
   oninit() { return };
   reset() { return };
+
+  
 }
 
 module.exports = Indicator;
