@@ -89,246 +89,248 @@ var testData2 = [
 { open: 9.3,	high: 9.4,	low: 9.3,   close: 9.35 },
 { open: 9.3,	high: 10.1,	low: 9.3,   close: 10.08 }];
 
-describe('EMA', function() {
-  var testEMA;
-  before( function() {
-    testEMA = new EMA(10);
-    testEMA_15 = new EMA(15);
-    testEMA_100 = new EMA(100);
+describe('Indicators', function() {
+  describe('Oscillators', function() {
+
   });
-  it('should have the correct period set', function() {
-    expect(testEMA.period).to.equal(10);
-    expect(testEMA_15.period).to.equal(15);
-    expect(testEMA_100.period).to.equal(100);
+  describe('Breadth Indicators', function() {
+
   });
-  it('should set the multiplier', function() {
-    expect(testEMA.multiplier).to.equal(0.18181818181818182);
-  });
-  it('should start out with isValid flag as false', function() {
-    expect(testEMA.isValid).to.equal(false);
-  });
-  it('should not calculate an EMA if called less than period', function() {
-    testEMA.update(testData[0]);
-    expect(testEMA.last).to.equal(0);
-    expect(testEMA.isValid).to.equal(false);
-    testEMA.update(testData[1]);
-    expect(testEMA.last).to.equal(0);
-    expect(testEMA.isValid).to.equal(false);
-    testEMA.update(testData[2]);
-    expect(testEMA.last).to.equal(0);
-    expect(testEMA.isValid).to.equal(false);
-    testEMA.update(testData[3]);
-    expect(testEMA.last).to.equal(0);
-    expect(testEMA.isValid).to.equal(false);
-    testEMA.update(testData[4]);
-    expect(testEMA.last).to.equal(0);
-    expect(testEMA.isValid).to.equal(false);
-    testEMA.update(testData[5]);
-    expect(testEMA.last).to.equal(0);
-    expect(testEMA.isValid).to.equal(false);
-    testEMA.update(testData[6]);
-    expect(testEMA.last).to.equal(0);
-    expect(testEMA.isValid).to.equal(false);
-    testEMA.update(testData[7]);
-    expect(testEMA.last).to.equal(0);
-    expect(testEMA.isValid).to.equal(false);
-    testEMA.update(testData[8]);
-    expect(testEMA.last).to.equal(0);
-    expect(testEMA.isValid).to.equal(false);
-  });
-  it('should return the SMA on the nth call where n is the period', function() {
-    testEMA.update(testData[9]);
-    expect(testEMA.last).to.equal(22.22475);
-  });
-  it('should set isValid flag to true', function() {
-    expect(testEMA.isValid).to.equal(true);
-  });
-  it('should return the EMA on the nth+1 call', function() {
-    testEMA.update(testData[10]);
-    expect(testEMA.last).to.equal(22.21192272727273);
-  });
-  it('should return the EMA on the nth+1 call', function() {
-    testEMA.update(testData[11]);
-    expect(testEMA.last).to.equal(22.24477314049587);
-  });
-  it('should return the EMA on the nth+1 call', function() {
-    testEMA.update(testData[12]);
-    expect(testEMA.last).to.equal(22.269650751314803);
+  describe('Overlays', function() {
+    describe('EMA', function() {
+      var testEMA;
+      before( function() {
+        testEMA = new EMA(10);
+        testEMA_15 = new EMA(15);
+        testEMA_100 = new EMA(100);
+      });
+      it('should have the correct period set', function() {
+        expect(testEMA.period).to.equal(10);
+        expect(testEMA_15.period).to.equal(15);
+        expect(testEMA_100.period).to.equal(100);
+      });
+      it('should set the multiplier', function() {
+        expect(testEMA.multiplier).to.equal(0.18181818181818182);
+      });
+      it('should start out with isValid flag as false', function() {
+        expect(testEMA.isValid).to.equal(false);
+      });
+      it('should not calculate an EMA if called less than period', function() {
+        testEMA.update(testData[0]);
+        expect(testEMA.last).to.equal(0);
+        expect(testEMA.isValid).to.equal(false);
+        testEMA.update(testData[1]);
+        expect(testEMA.last).to.equal(0);
+        expect(testEMA.isValid).to.equal(false);
+        testEMA.update(testData[2]);
+        expect(testEMA.last).to.equal(0);
+        expect(testEMA.isValid).to.equal(false);
+        testEMA.update(testData[3]);
+        expect(testEMA.last).to.equal(0);
+        expect(testEMA.isValid).to.equal(false);
+        testEMA.update(testData[4]);
+        expect(testEMA.last).to.equal(0);
+        expect(testEMA.isValid).to.equal(false);
+        testEMA.update(testData[5]);
+        expect(testEMA.last).to.equal(0);
+        expect(testEMA.isValid).to.equal(false);
+        testEMA.update(testData[6]);
+        expect(testEMA.last).to.equal(0);
+        expect(testEMA.isValid).to.equal(false);
+        testEMA.update(testData[7]);
+        expect(testEMA.last).to.equal(0);
+        expect(testEMA.isValid).to.equal(false);
+        testEMA.update(testData[8]);
+        expect(testEMA.last).to.equal(0);
+        expect(testEMA.isValid).to.equal(false);
+      });
+      it('should return the SMA on the nth call where n is the period', function() {
+        testEMA.update(testData[9]);
+        expect(testEMA.last).to.equal(22.22475);
+      });
+      it('should set isValid flag to true', function() {
+        expect(testEMA.isValid).to.equal(true);
+      });
+      it('should return the EMA on the nth+1 call', function() {
+        testEMA.update(testData[10]);
+        expect(testEMA.last).to.equal(22.21192272727273);
+      });
+      it('should return the EMA on the nth+1 call', function() {
+        testEMA.update(testData[11]);
+        expect(testEMA.last).to.equal(22.24477314049587);
+      });
+      it('should return the EMA on the nth+1 call', function() {
+        testEMA.update(testData[12]);
+        expect(testEMA.last).to.equal(22.269650751314803);
+      });
+    });
+
+    describe('SMA', function() {
+      var testSMA;
+      before( function() {
+        testSMA = new SMA(10);
+        testSMA_15 = new SMA(15);
+        testSMA_100 = new SMA(100);
+      });
+      it('should have the correct period set', function() {
+        expect(testSMA.period).to.equal(10);
+        expect(testSMA_15.period).to.equal(15);
+        expect(testSMA_100.period).to.equal(100);
+      });
+      it('should start out with isValid flag as false', function() {
+        expect(testSMA.isValid).to.equal(false);
+      });
+      it('should not calculate an SMA if called less than period', function() {
+        testSMA.update(testData[0]);
+        expect(testSMA.last).to.equal(0);
+        expect(testSMA.isValid).to.equal(false);
+        testSMA.update(testData[1]);
+        expect(testSMA.last).to.equal(0);
+        expect(testSMA.isValid).to.equal(false);
+        testSMA.update(testData[2]);
+        expect(testSMA.last).to.equal(0);
+        expect(testSMA.isValid).to.equal(false);
+        testSMA.update(testData[3]);
+        expect(testSMA.last).to.equal(0);
+        expect(testSMA.isValid).to.equal(false);
+        testSMA.update(testData[4]);
+        expect(testSMA.last).to.equal(0);
+        expect(testSMA.isValid).to.equal(false);
+        testSMA.update(testData[5]);
+        expect(testSMA.last).to.equal(0);
+        expect(testSMA.isValid).to.equal(false);
+        testSMA.update(testData[6]);
+        expect(testSMA.last).to.equal(0);
+        expect(testSMA.isValid).to.equal(false);
+        testSMA.update(testData[7]);
+        expect(testSMA.last).to.equal(0);
+        expect(testSMA.isValid).to.equal(false);
+        testSMA.update(testData[8]);
+        expect(testSMA.last).to.equal(0);
+        expect(testSMA.isValid).to.equal(false);
+      });
+      it('should return the SMA on the nth call where n is the period', function() {
+        testSMA.update(testData[9]);
+        expect(testSMA.last).to.equal(22.22475);
+      });
+      it('should set isValid flag to true', function() {
+        expect(testSMA.isValid).to.equal(true);
+      });
+      it('should return the SMA on the nth+1 call', function() {
+        testSMA.update(testData[10]);
+        expect(testSMA.last).to.equal(22.21283);
+      });
+      it('should return the SMA on the nth+1 call', function() {
+        testSMA.update(testData[11]);
+        expect(testSMA.last).to.equal(22.23269);
+      });
+      it('should return the SMA on the nth+1 call', function() {
+        testSMA.update(testData[12]);
+        expect(testSMA.last).to.equal(22.26238);
+      });
+    });
+    describe('Parabolic SAR', function() {
+      var testPSAR;
+      before( function() {
+        testPSAR = new PSAR(0.02, 0.2);
+      });
+      it('should start out with isValid flag as false', function() {
+        expect(testPSAR.isValid).to.equal(false);
+      });
+      it('should not calculate a SAR if called less than 5 times', function() {
+        testPSAR.update(testData2[0]);
+        expect(testPSAR.last).to.equal(0);
+        expect(testPSAR.isValid).to.equal(false);
+        testPSAR.update(testData2[1]);
+        expect(testPSAR.last).to.equal(0);
+        expect(testPSAR.isValid).to.equal(false);
+        testPSAR.update(testData2[2]);
+        expect(testPSAR.last).to.equal(0);
+        expect(testPSAR.isValid).to.equal(false);
+        testPSAR.update(testData2[3]);
+        expect(testPSAR.last).to.equal(0);
+        expect(testPSAR.isValid).to.equal(false);
+      });
+      it('should return the SAR on the 5th call', function() {
+        testPSAR.update(testData2[4]);
+        expect(testPSAR.last).to.equal(9.350);
+      });
+      it('should set isValid flag to true', function() {
+        expect(testPSAR.isValid).to.equal(true);
+      });
+      it('should handle downward trends', function() {
+        testPSAR.update(testData2[5]);
+        expect(testPSAR.last).to.equal(9.350);
+        testPSAR.update(testData2[6]);
+        expect(testPSAR.last).to.equal(10.330);
+        testPSAR.update(testData2[7]);
+        expect(testPSAR.last).to.equal(10.2768);
+        testPSAR.update(testData2[8]);
+        expect(testPSAR.last).to.equal(10.225728);
+        testPSAR.update(testData2[9]);
+        expect(testPSAR.last).to.equal(10.17669888);
+        testPSAR.update(testData2[10]);
+        expect(testPSAR.last).to.equal(10.1030969472);
+        testPSAR.update(testData2[11]);
+        expect(testPSAR.last).to.equal(10.033911130367999);
+      });
+      it('should be able to handle a reversal in trend', function() {
+        testPSAR.update(testData2[12]);
+        expect(testPSAR.last).to.equal(8.950);
+      });
+      it('should handle upward trends', function() {
+        testPSAR.update(testData2[13]);
+        expect(testPSAR.last).to.equal(8.9964);
+        testPSAR.update(testData2[14]);
+        expect(testPSAR.last).to.equal(9.086616);
+        testPSAR.update(testData2[15]);
+        expect(testPSAR.last).to.equal(9.25968672);
+        testPSAR.update(testData2[16]);
+        expect(testPSAR.last).to.equal(9.490718048);
+        testPSAR.update(testData2[17]);
+        expect(testPSAR.last).to.equal(9.698646243199999);
+        testPSAR.update(testData2[18]);
+        expect(testPSAR.last).to.equal(9.950808694015999);
+        testPSAR.update(testData2[19]);
+        expect(testPSAR.last).to.equal(10.22369547685376);
+        testPSAR.update(testData2[20]);
+        expect(testPSAR.last).to.equal(10.498304200557158);
+        testPSAR.update(testData2[21]);
+        expect(testPSAR.last).to.equal(10.728975528468013);
+        testPSAR.update(testData2[22]);
+        expect(testPSAR.last).to.equal(10.92273944391313);
+        testPSAR.update(testData2[23]);
+        expect(testPSAR.last).to.equal(11.94);
+        testPSAR.update(testData2[24]);
+        expect(testPSAR.last).to.equal(11.906799999999999);
+      });
+    });
   });
 });
 
-describe('SMA', function() {
-  var testSMA;
-  before( function() {
-    testSMA = new SMA(10);
-    testSMA_15 = new SMA(15);
-    testSMA_100 = new SMA(100);
+describe('StateMachine', function() {
+  describe('State: Watching', function() {
+    it('should have an idle/Watching state to watch');
+    it('should initialize to Watching State on creation/initialization');
   });
-  it('should have the correct period set', function() {
-    expect(testSMA.period).to.equal(10);
-    expect(testSMA_15.period).to.equal(15);
-    expect(testSMA_100.period).to.equal(100);
-  });
-  it('should start out with isValid flag as false', function() {
-    expect(testSMA.isValid).to.equal(false);
-  });
-  it('should not calculate an SMA if called less than period', function() {
-    testSMA.update(testData[0]);
-    expect(testSMA.last).to.equal(0);
-    expect(testSMA.isValid).to.equal(false);
-    testSMA.update(testData[1]);
-    expect(testSMA.last).to.equal(0);
-    expect(testSMA.isValid).to.equal(false);
-    testSMA.update(testData[2]);
-    expect(testSMA.last).to.equal(0);
-    expect(testSMA.isValid).to.equal(false);
-    testSMA.update(testData[3]);
-    expect(testSMA.last).to.equal(0);
-    expect(testSMA.isValid).to.equal(false);
-    testSMA.update(testData[4]);
-    expect(testSMA.last).to.equal(0);
-    expect(testSMA.isValid).to.equal(false);
-    testSMA.update(testData[5]);
-    expect(testSMA.last).to.equal(0);
-    expect(testSMA.isValid).to.equal(false);
-    testSMA.update(testData[6]);
-    expect(testSMA.last).to.equal(0);
-    expect(testSMA.isValid).to.equal(false);
-    testSMA.update(testData[7]);
-    expect(testSMA.last).to.equal(0);
-    expect(testSMA.isValid).to.equal(false);
-    testSMA.update(testData[8]);
-    expect(testSMA.last).to.equal(0);
-    expect(testSMA.isValid).to.equal(false);
-  });
-  it('should return the SMA on the nth call where n is the period', function() {
-    testSMA.update(testData[9]);
-    expect(testSMA.last).to.equal(22.22475);
-  });
-  it('should set isValid flag to true', function() {
-    expect(testSMA.isValid).to.equal(true);
-  });
-  it('should return the SMA on the nth+1 call', function() {
-    testSMA.update(testData[10]);
-    expect(testSMA.last).to.equal(22.21283);
-  });
-  it('should return the SMA on the nth+1 call', function() {
-    testSMA.update(testData[11]);
-    expect(testSMA.last).to.equal(22.23269);
-  });
-  it('should return the SMA on the nth+1 call', function() {
-    testSMA.update(testData[12]);
-    expect(testSMA.last).to.equal(22.26238);
-  });
-});
+  describe('State: InPlay', function() {
+    it('should have an In Play state');
 
-describe('Parabolic SAR', function() {
-  var testPSAR;
-  before( function() {
-    testPSAR = new PSAR(0.02, 0.2);
+
   });
-  it('should start out with isValid flag as false', function() {
-    expect(testPSAR.isValid).to.equal(false);
+  describe('State: LongPosition', function() {
+    it('should have a Long Position State');
+
   });
-  it('should not calculate a SAR if called less than 5 times', function() {
-    testPSAR.update(testData2[0]);
-    expect(testPSAR.last).to.equal(0);
-    expect(testPSAR.isValid).to.equal(false);
-    testPSAR.update(testData2[1]);
-    expect(testPSAR.last).to.equal(0);
-    expect(testPSAR.isValid).to.equal(false);
-    testPSAR.update(testData2[2]);
-    expect(testPSAR.last).to.equal(0);
-    expect(testPSAR.isValid).to.equal(false);
-    testPSAR.update(testData2[3]);
-    expect(testPSAR.last).to.equal(0);
-    expect(testPSAR.isValid).to.equal(false);
+  describe('State: ShortPosition', function() {
+    it('should have a Short Position State');
+
   });
-  it('should return the SAR on the 5th call where n is the period', function() {
-    testPSAR.update(testData2[4]);
-    expect(testPSAR.last).to.equal(9.350);
+  describe('State: CompletedTrade', function() {
+    it('should have a Complete Trade State');
+
   });
-  it('should set isValid flag to true', function() {
-    expect(testPSAR.isValid).to.equal(true);
-  });
-  it('should return the SAR on the nth+1 call', function() {
-    testPSAR.update(testData2[5]);
-    expect(testPSAR.last).to.equal(9.350);
-  });
-  it('should return the EMA on the nth+1 call', function() {
-    testPSAR.update(testData2[6]);
-    expect(testPSAR.last).to.equal(10.330);
-  });
-  it('should return the EMA on the nth+1 call', function() {
-    testPSAR.update(testData2[7]);
-    expect(testPSAR.last).to.equal(10.2768);
-  });
-  it('should return the EMA on the nth+1 call', function() {
-    testPSAR.update(testData2[8]);
-    expect(testPSAR.last).to.equal(10.225728);
-  });
-  it('should return the EMA on the nth+1 call', function() {
-    testPSAR.update(testData2[9]);
-    expect(testPSAR.last).to.equal(10.17669888);
-  });
-  it('should return the EMA on the nth+1 call', function() {
-    testPSAR.update(testData2[10]);
-    expect(testPSAR.last).to.equal(10.1030969472);
-  });
-  it('should return the EMA on the nth+1 call', function() {
-    testPSAR.update(testData2[11]);
-    expect(testPSAR.last).to.equal(10.033911130367999);
-  });
-  it('should return the EMA on the nth+1 call', function() {
-    testPSAR.update(testData2[12]);
-    expect(testPSAR.last).to.equal(8.950);
-  });
-  it('should return the EMA on the nth+1 call', function() {
-    testPSAR.update(testData2[13]);
-    expect(testPSAR.last).to.equal(8.9964);
-  });
-  it('should return the EMA on the nth+1 call', function() {
-    testPSAR.update(testData2[14]);
-    expect(testPSAR.last).to.equal(9.086616);
-  });
-  it('should return the EMA on the nth+1 call', function() {
-    testPSAR.update(testData2[15]);
-    expect(testPSAR.last).to.equal(9.25968672);
-  });
-  it('should return the EMA on the nth+1 call', function() {
-    testPSAR.update(testData2[16]);
-    expect(testPSAR.last).to.equal(9.490718048);
-  });
-  it('should return the EMA on the nth+1 call', function() {
-    testPSAR.update(testData2[17]);
-    expect(testPSAR.last).to.equal(9.698646243199999);
-  });
-  it('should return the EMA on the nth+1 call', function() {
-    testPSAR.update(testData2[18]);
-    expect(testPSAR.last).to.equal(9.950808694015999);
-  });
-  it('should return the EMA on the nth+1 call', function() {
-    testPSAR.update(testData2[19]);
-    expect(testPSAR.last).to.equal(10.22369547685376);
-  });
-  it('should return the EMA on the nth+1 call', function() {
-    testPSAR.update(testData2[20]);
-    expect(testPSAR.last).to.equal(10.498304200557158);
-  });
-  it('should return the EMA on the nth+1 call', function() {
-    testPSAR.update(testData2[21]);
-    expect(testPSAR.last).to.equal(10.728975528468013);
-  });
-  it('should return the EMA on the nth+1 call', function() {
-    testPSAR.update(testData2[22]);
-    expect(testPSAR.last).to.equal(10.92273944391313);
-  });
-  it('should return the EMA on the nth+1 call', function() {
-    testPSAR.update(testData2[23]);
-    expect(testPSAR.last).to.equal(11.94);
-  });
-  it('should return the EMA on the nth+1 call', function() {
-    testPSAR.update(testData2[24]);
-    expect(testPSAR.last).to.equal(11.906799999999999);
+  describe('Watchdog', function() {
+    it('should have a watchdog');
   });
 });

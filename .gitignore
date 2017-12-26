@@ -50,3 +50,6 @@ Thumbs.db
 # Other Specific files #
 ########################
 output.txt
+
+node_modules/
+.vscode/

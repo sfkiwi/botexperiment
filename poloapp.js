@@ -19,14 +19,14 @@ var currentTicker = 'BTC_ETH'
 
 var updateIndicators = function() {
 
-    _.each(_.filter(indicators, function(indicator) {
+/*    _.each(_.filter(indicators, function(indicator) {
         return (indicator.upateType === 'Price');
       }), function(indicator) {
             indicator.update(tickerData[tickerData.length-1].lastPrice);
-    });
+    });*/
 }
 
-var session_1M = function() {
+/*var session_1M = function() {
 
   setTimeout(session_1M, 60000);
 
@@ -63,11 +63,11 @@ var session_1M = function() {
   process.stdout.write(`##### Close: ${candelstick.close}\n`);
   process.stdout.write(`###############################\n\n`);
 
-}
+}*/
 
 connection.onopen = function (session, details) {
 
-
+  debugger;
   function marketEvent (args,kwargs, details) {
 		console.log(args);
 	}
@@ -157,12 +157,12 @@ if (process.argv.length > 2) {
 
 connection.open();
 
-indicators.push(new SMA(5));
+/*indicators.push(new SMA(5));
 indicators.push(new SMA(15));
 indicators.push(new SMA(60));
 indicators.push(new EMA(10));
 indicators.push(new EMA(50));
 indicators.push(new EMA(100));
 
-indicators.push(new PSAR(0.02,0.2));
-setTimeout(session_1M, 60000);
+indicators.push(new PSAR(0.02,0.2));*/
+//setTimeout(session_1M, 60000);

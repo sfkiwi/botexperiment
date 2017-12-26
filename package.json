@@ -5,9 +5,18 @@
   },
   "devDependencies": {
     "chai": "^4.1.2",
-    "mocha": "^4.0.1"
+    "javascript-state-machine": "^3.0.1",
+    "mocha": "^4.0.1",
+    "talib": "^1.0.3"
   },
   "scripts": {
     "test": "./node_modules/mocha/bin/mocha"
-  }
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/sfkiwi/botexperiment"
+  },
+  "name": "poloapp",
+  "version": "1.0.0",
+  "private": true
 }

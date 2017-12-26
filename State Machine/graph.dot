@@ -1,0 +1,11 @@
+digraph "fsm" {
+  "waiting";
+  "watching";
+  "trading";
+  "completing";
+  "waiting" -> "watching" [ label=" engage " ];
+  "watching" -> "trading" [ label=" buy " ];
+  "watching" -> "waiting" [ label=" disengage " ];
+  "trading" -> "completing" [ label=" exit " ];
+  "completing" -> "watching" [ label=" ready " ];
+}
