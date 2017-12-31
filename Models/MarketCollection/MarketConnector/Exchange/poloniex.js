@@ -24,6 +24,8 @@ class PoloniexConnector {
 
       this.connection.onopen = function (session, details) {
 
+        console.log('Established Connection to Exchange');
+
         session.subscribe('ticker', this.onTickPrep.bind(this))
 
           .then(resolve)
@@ -37,6 +39,7 @@ class PoloniexConnector {
 
   onTickPrep(args, kwargs, details) {
 
+    console.log('Price Tick');
     if (args) {
       if (args[0] === this.pair) {
         this.onTick({

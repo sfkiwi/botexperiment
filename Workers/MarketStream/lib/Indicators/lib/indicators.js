@@ -21,7 +21,7 @@ market related, and include Trin, Ticks, Tiki and the Advance-Decline Line.*/
 class Indicator {
   constructor() {
     this.type = 'none'; // 'EMA', 'SMA', 'ParabolicSAR'
-    this.upateType = 'undefined'; // 'Price', 'Candelstick'
+    this.updateType = 'undefined'; // 'Price', 'Candelstick'
     this.isValid = false;
     this.data = []; //store past [period] no of prices
     this.history = []; //store past MA values
