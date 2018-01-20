@@ -2,7 +2,20 @@
   "dependencies": {
     "autobahn": "^17.5.2",
     "axios": "^0.17.1",
+    "babel-core": "^6.26.0",
+    "babel-loader": "^7.1.2",
+    "babel-preset-env": "^1.6.1",
+    "babel-preset-react": "^6.24.1",
+    "body-parser": "^1.18.2",
+    "css-loader": "^0.28.8",
+    "express": "^4.16.2",
+    "morgan": "^1.9.0",
+    "react": "^16.2.0",
+    "react-dom": "^16.2.0",
+    "socket.io": "^2.0.4",
+    "style-loader": "^0.19.1",
     "underscore": "^1.8.3",
+    "webpack": "^3.10.0",
     "ws": "^3.3.3"
   },
   "devDependencies": {
@@ -12,7 +25,12 @@
     "talib": "^1.0.3"
   },
   "scripts": {
-    "test": "./node_modules/mocha/bin/mocha"
+    "test": "./node_modules/mocha/bin/mocha",
+    "postinstall": "webpack -p",
+    "start": "node server/index.js",
+    "start:dev": "nodemon server/index.js",
+    "start:debug": "nodemon --inspect server/index.js",
+    "react:dev": "webpack -d -w"
   },
   "repository": {
     "type": "git",
